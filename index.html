@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MAAT LABS – Portfolio de Senou Adjogan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#0b1220;--bg2:#16233a;--card:rgba(255,255,255,.05);--txt:#f1f5f9;--mut:#a9b6c8;--acc:#19e3c5;--glow:rgba(25,227,197,.45);--btn-txt:#04201b;--hdr:rgba(11,18,32,.88);color-scheme:dark}
+[data-theme="light"]{--bg1:#f4f8fb;--bg2:#dfeaf3;--card:#fff;--txt:#0f172a;--mut:#475569;--acc:#058d78;--glow:rgba(5,141,120,.35);--btn-txt:#fff;--hdr:rgba(244,248,251,.92);color-scheme:light}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:Manrope,system-ui,sans-serif;color:var(--txt);background:linear-gradient(160deg,var(--bg1),var(--bg2)) fixed;line-height:1.6}
+h1,h2,h3,.logo,.nav a,.btn{font-family:Sora,system-ui,sans-serif}
+header{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 4%;background:var(--hdr);backdrop-filter:blur(10px)}
+.logo{font-weight:800;font-size:1.25rem}.logo span,.hl{color:var(--acc)}
+.nav{display:flex;gap:20px}
+.nav a{color:var(--txt);text-decoration:none;font-weight:600;font-size:.88rem;padding:4px 0;border-bottom:2px solid transparent}
+.nav a:hover,.nav a.on{color:var(--acc);border-color:var(--acc)}
+.tools{display:flex;gap:8px}
+.ib{background:none;border:1.5px solid var(--acc);color:var(--acc);border-radius:999px;min-width:38px;height:38px;padding:0 10px;cursor:pointer;font:700 .85rem Sora,sans-serif}
+.ib:hover{background:var(--acc);color:var(--btn-txt)}
+#burger{display:none}
+section{padding:100px 6% 40px;display:flex;flex-direction:column;align-items:center;text-align:center}
+#home{min-height:100vh;justify-content:center}
+.photo{width:250px;aspect-ratio:3/4;border-radius:38px;border:3px solid var(--acc);box-shadow:0 0 45px var(--glow);overflow:hidden;background:var(--card);margin-bottom:24px}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:top}
+h1{font-size:clamp(2.1rem,6vw,3.5rem);line-height:1.15}
+.role{font-family:Sora,sans-serif;font-weight:600;font-size:clamp(1.15rem,3vw,1.6rem);margin:6px 0 14px;min-height:2.2rem}
+.cur{border-right:3px solid var(--acc);margin-left:3px;animation:b 1s steps(1) infinite}@keyframes b{50%{border-color:transparent}}
+.lead{max-width:620px;color:var(--mut);margin-bottom:20px}
+.soc{display:flex;gap:12px;margin-bottom:22px;justify-content:center}
+.soc a{width:42px;height:42px;border:2px solid var(--acc);border-radius:50%;display:grid;place-items:center;color:var(--acc);text-decoration:none;font:700 .85rem Sora,sans-serif;transition:.2s}
+.soc a:hover{background:var(--acc);color:var(--btn-txt);box-shadow:0 0 18px var(--glow)}
+.btn{display:inline-block;background:var(--acc);color:var(--btn-txt);border:0;padding:12px 28px;border-radius:999px;font-weight:700;font-size:.92rem;cursor:pointer;text-decoration:none;box-shadow:0 0 22px var(--glow)}
+.btn:hover{transform:translateY(-2px)}
+h2{font-size:clamp(1.8rem,5vw,2.6rem);margin-bottom:22px}
+.wrap{display:flex;gap:48px;align-items:center;justify-content:center;flex-wrap:wrap;text-align:left;max-width:980px}
+.wrap .photo{margin:0}.wrap .lead{margin-left:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chips span,.tags span{border:1.5px solid var(--acc);border-radius:999px;padding:4px 14px;font-size:.85rem;font-weight:600}
+.tl{border-left:2px solid var(--acc);padding-left:22px;text-align:left;max-width:620px;width:100%;margin-bottom:24px}
+.tl div{position:relative;margin-bottom:22px}
+.tl div::before{content:"";position:absolute;left:-29px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--glow)}
+.tl b{display:block;font-family:Sora,sans-serif}.tl span{color:var(--mut);font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;width:100%;max-width:1000px}
+.card{background:var(--card);border:1.5px solid var(--acc);border-radius:20px;padding:24px;text-align:left;box-shadow:0 0 18px var(--glow)}
+.card h3{color:var(--acc);margin-bottom:8px;font-size:1.1rem}.card p{color:var(--mut);font-size:.94rem;margin-bottom:12px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}.tags span{font-size:.75rem;padding:2px 10px}
+.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;width:100%;max-width:1000px}
+.gal img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:20px;border:2px solid var(--acc);box-shadow:0 0 16px var(--glow);transition:transform .3s}
+.gal img:hover{transform:scale(1.03)}
+form{width:100%;max-width:560px;display:flex;flex-direction:column;gap:14px}
+input,textarea{width:100%;background:transparent;border:2px solid var(--acc);border-radius:12px;padding:13px 15px;color:var(--txt);font:500 1rem Manrope,sans-serif;outline:none}
+input:focus,textarea:focus{box-shadow:0 0 16px var(--glow)}
+textarea{min-height:130px;resize:vertical}::placeholder{color:var(--mut)}
+#msg-ok{color:var(--acc);font-weight:700;min-height:1.4rem}
+footer{padding:40px 6%;text-align:center;border-top:1px solid var(--glow);color:var(--mut);font-size:.9rem}
+footer .links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+footer a{color:var(--txt);text-decoration:none}footer a:hover{color:var(--acc)}
+#adm{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;padding:16px}
+#adm.open{display:flex}
+.pn{background:var(--bg1);border:2px solid var(--acc);border-radius:20px;width:100%;max-width:700px;max-height:85vh;overflow:auto;padding:22px}
+.pn .top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.m{border:1px solid var(--glow);border-radius:12px;padding:12px;margin-bottom:10px;font-size:.92rem}.m small{color:var(--mut)}.m b{color:var(--acc)}
+.cvw{width:100%;max-width:900px;display:flex;flex-direction:column;align-items:center;text-align:left}
+.cvw>h3{align-self:flex-start;color:var(--acc);margin:24px 0 14px;font-size:1.15rem}
+.cvw .tl{max-width:100%}.cvw .grid{max-width:100%}
+.tl small{display:block;color:var(--acc);font-size:.8rem;font-weight:700}.tl p{color:var(--mut);font-size:.9rem;margin-top:4px}
+.card ul{padding-left:18px;color:var(--mut);font-size:.94rem}.card h3{margin-bottom:8px}
+.lead a{color:var(--acc)}
+@media(max-width:1000px){#burger{display:inline-block}.nav{position:fixed;top:62px;left:0;right:0;flex-direction:column;background:var(--hdr);padding:18px;display:none;gap:14px}.nav.open{display:flex}.wrap{text-align:center;justify-content:center}.chips{justify-content:center}}
+@media(prefers-reduced-motion:reduce){.cur{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">MAAT <span>LABS</span></div>
+  <nav class="nav" id="nav">
+    <a href="#home" class="on" data-i18n="nav_home">Accueil</a>
+    <a href="#about" data-i18n="nav_about">À propos</a>
+    <a href="#cv" data-i18n="nav_cv">CV</a>
+    <a href="#projects" data-i18n="nav_proj">Projets</a>
+    <a href="#services" data-i18n="nav_services">Services</a>
+    <a href="#contact" data-i18n="nav_contact">Contact</a>
+  </nav>
+  <div class="tools">
+    <button class="ib" id="lang" type="button" aria-label="Langue">EN</button>
+    <button class="ib" id="theme" type="button" aria-label="Mode jour/nuit">☀</button>
+    <button class="ib" id="burger" type="button" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<section id="home">
+  <div class="photo"><img src="images/hero.jpg" alt="Senou Adjogan"></div>
+  <h1><span data-i18n="hello">C'est</span> <span class="hl">Senou</span></h1>
+  <p class="role"><span data-i18n="iam">Je suis</span> <span class="hl" id="typed"></span><span class="cur"></span></p>
+  <p class="lead" data-i18n="intro">Étudiant en génie informatique, développeur web et passionné d'IA. Je conçois des sites et des solutions numériques modernes avec MAAT LABS.</p>
+  <div class="soc">
+    <a href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+    <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+    <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+    <a href="https://github.com/senouadj" target="_blank" rel="noopener" aria-label="GitHub">gh</a>
+  </div>
+  <a class="btn" href="#contact" data-i18n="hire">Me contacter</a>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="photo"><img src="images/about.jpg" alt="Senou Adjogan" loading="lazy"></div>
+    <div>
+      <h2><span data-i18n="about_t1">À propos de</span> <span class="hl" data-i18n="about_t2">moi</span></h2>
+      <p class="lead" data-i18n="about_p">Étudiant en 2e année de Système informatique et logiciel à l'ISGG (Bénin), je crée des sites web et je me forme à l'intelligence artificielle et au Machine Learning. Je crois aux outils simples, utiles et bien dessinés.</p>
+      <div class="chips"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>C#</span><span>Python</span><span>NumPy</span><span>Pandas</span><span>Machine Learning</span></div>
+      <a class="btn" href="#cv" data-i18n="more">Voir mon CV</a>
+    </div>
+  </div>
+</section>
+
+<section id="cv">
+  <h2><span data-i18n="cv1">Mon</span> <span class="hl">CV</span></h2>
+  <div class="cvw">
+    <p class="lead" id="cv-profil"></p>
+    <h3 data-i18n="h_edu">Formation</h3><div class="tl" id="cv-edu"></div>
+    <h3 data-i18n="h_exp">Expérience professionnelle</h3><div class="tl" id="cv-exp"></div>
+    <h3 data-i18n="h_cert">Certifications</h3><div class="grid" id="cv-cert"></div>
+    <div class="grid" style="margin-top:24px">
+      <div class="card"><h3 data-i18n="h_sk">Compétences</h3><ul id="cv-sk"></ul></div>
+      <div class="card"><h3 data-i18n="h_lg">Langues</h3><ul id="cv-lg"></ul><h3 data-i18n="h_hb" style="margin-top:16px">Centres d'intérêt</h3><ul id="cv-hb"></ul></div>
+    </div>
+  </div>
+  <br><a class="btn" href="cv.pdf" download data-i18n="dl">Télécharger mon CV (PDF)</a>
+</section>
+
+<section id="projects">
+  <h2><span data-i18n="pj1">Mes</span> <span class="hl" data-i18n="pj2">Projets</span></h2>
+  <div class="grid">
+    <div class="card"><h3 data-i18n="p1t">Morpion intelligent</h3><p data-i18n="p1p">Un morpion où une IA apprend à jouer : comparaison entre Q-learning et Deep Q-Network.</p><div class="tags"><span>Python</span><span>IA</span></div></div>
+    <div class="card"><h3>UNITY FORM</h3><p data-i18n="p2p">Plateforme de formations : inscriptions, comptes apprenants et certificats avec QR code vérifiable.</p><div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div></div>
+    <div class="card"><h3 data-i18n="p3t">Plateforme d'exercices de code</h3><p data-i18n="p3p">Application web pour aider les étudiants en informatique à s'entraîner à la programmation.</p><div class="tags"><span>Web</span></div></div>
+    <div class="card"><h3>TicketShield</h3><p data-i18n="p4p">Page web de vérification de tickets prépayés.</p><div class="tags"><span>HTML</span><span>CSS</span></div></div>
+  </div>
+  <br><a class="btn" href="https://github.com/senouadj" target="_blank" rel="noopener" data-i18n="gh">Voir mon GitHub</a>
+</section>
+
+<section id="services">
+  <h2><span data-i18n="serv_t1">Mes</span> <span class="hl" data-i18n="serv_t2">Services</span></h2>
+  <div class="grid">
+    <div class="card"><h3 data-i18n="s1t">Développement web</h3><p data-i18n="s1p">Sites vitrines, portfolios et applications web rapides, adaptés au mobile.</p></div>
+    <div class="card"><h3 data-i18n="s2t">Design UI / UX</h3><p data-i18n="s2p">Interfaces claires et modernes, pensées pour vos utilisateurs.</p></div>
+    <div class="card"><h3 data-i18n="s3t">IA et données</h3><p data-i18n="s3p">Prototypes d'intelligence artificielle et analyse de données avec Python.</p></div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2><span data-i18n="ct1">Me</span> <span class="hl" data-i18n="ct2">Contacter</span></h2>
+  <p class="lead"><a href="mailto:senouadjogan9@gmail.com">senouadjogan9@gmail.com</a> · Abomey-Calavi, Bénin</p>
+  <form id="f">
+    <input name="nom" required data-i18n-ph="ph_name" placeholder="Nom complet" autocomplete="name">
+    <input name="email" type="email" required data-i18n-ph="ph_mail" placeholder="Email" autocomplete="email">
+    <input name="tel" type="tel" data-i18n-ph="ph_tel" placeholder="Numéro de téléphone" autocomplete="tel">
+    <input name="suggestion" data-i18n-ph="ph_sug" placeholder="Suggestion">
+    <textarea name="message" required data-i18n-ph="ph_msg" placeholder="Votre message"></textarea>
+    <button class="btn" type="submit" data-i18n="send">Envoyer le message</button>
+    <p id="msg-ok" role="status"></p>
+  </form>
+</section>
+
+<footer>
+  <div class="soc">
+    <a href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+    <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">ig</a>
+    <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+    <a href="https://github.com/senouadj" target="_blank" rel="noopener" aria-label="GitHub">gh</a>
+  </div>
+  <div class="links">
+    <a href="#services" data-i18n="nav_services">Services</a><a href="#about" data-i18n="f_about">À propos de moi</a>
+    <a href="#contact" data-i18n="nav_contact">Contact</a><a href="#home" data-i18n="privacy">Politique de confidentialité</a>
+    <a href="#" id="open-adm" data-i18n="admin">Espace admin</a>
+  </div>
+  <p>© MAAT LABS | <span data-i18n="rights">Tous droits réservés</span></p>
+</footer>
+
+<div id="adm"><div class="pn">
+  <div class="top"><h3 class="hl" data-i18n="inbox">Messages reçus</h3>
+    <div><button class="ib" id="csv" type="button">CSV</button> <button class="ib" id="clr" type="button" data-i18n="clear">Tout supprimer</button> <button class="ib" id="cls" type="button">✕</button></div></div>
+  <div id="list"></div>
+</div></div>
+
+<script>
+/* ===== RÉGLAGES ===== */
+var ADMIN_PASSWORD = "maatlabs2026";  // change-le !
+var FORM_ENDPOINT  = "";              // ex: "https://formspree.io/f/xxxxxxx" pour recevoir aussi les messages par e-mail
+
+var T={
+fr:{nav_home:"Accueil",nav_about:"À propos",nav_cv:"CV",nav_proj:"Projets",nav_services:"Services",nav_contact:"Contact",hello:"C'est",iam:"Je suis",
+intro:"Étudiant en génie informatique, développeur web et passionné d'IA. Je conçois des sites et des solutions numériques modernes avec MAAT LABS.",hire:"Me contacter",
+about_t1:"À propos de",about_t2:"moi",about_p:"Étudiant en 2e année de Système informatique et logiciel à l'ISGG (Bénin), je crée des sites web et je me forme à l'intelligence artificielle et au Machine Learning. Je crois aux outils simples, utiles et bien dessinés.",more:"Voir mon CV",
+cv1:"Mon",dl:"Télécharger mon CV (PDF)",h_edu:"Formation",h_exp:"Expérience professionnelle",h_cert:"Certifications",h_sk:"Compétences",h_lg:"Langues",h_hb:"Centres d'intérêt",cv:{"profil": "Étudiant en 2e année de Système informatique et logiciel, avec un solide parcours technique (installation et maintenance informatique, électrotechnique). Passionné par les nouvelles technologies, j'ai développé mes compétences en programmation (C#, JavaScript) grâce à des certifications reconnues. Inscrit au club IA de la bibliothèque Bénin Excellence de Godomey, je suis des cours de Machine Learning. Rigoureux et curieux, je veux mettre ma polyvalence au service d'une équipe professionnelle.", "edu": [["Licence en Système informatique et logiciel", "Institut Supérieur de Génie Civil et de Gestion (ISGG), Abomey-Calavi", "Depuis oct. 2025"], ["EEIA 2026 – École d'Été sur l'Intelligence Artificielle", "Programme intensif, Bénin", "Juil. – août 2026"], ["Cours GCI World – Matsuo-Iwasawa Lab", "Université de Tokyo", "En cours"], ["Technicien en installation et maintenance informatique (IMI)", "Complexe Privé d'Enseignement Technique Le FAUCON, Abomey-Calavi", "Sept. 2022 – août 2025"], ["CAP en Électrotechnique", "Complexe Privé d'Enseignement Technique Le FAUCON, Abomey-Calavi", "Sept. 2022 – juin 2024"], ["Brevet d'Étude du Premier Cycle", "Complexe Scolaire BETHLEEM, Ahossougbéta", "Sept. 2021 – juil. 2022"], ["Certificat d'Étude Primaire", "Complexe Scolaire BETHLEEM, Ahossougbéta", "Sept. 2015 – juin 2016"]], "exp": [["Stagiaire en maintenance informatique", "École Supérieure le FAUCON, Abomey-Calavi", "Juin – juil. 2023", "Réparation, mise à jour et nettoyage du parc informatique, assistance aux utilisateurs, résolution de bugs logiciels, inventaire du matériel."], ["Stagiaire en développement web", "École Supérieure le FAUCON (ESF), Abomey-Calavi", "Juin – août 2023", "Bases du développement front-end (HTML, CSS) et collaboration avec l'équipe pédagogique sur l'architecture d'un site web dynamique."]], "cert": [["Principes fondamentaux de l'IA", "Heure IA · référentiel UNESCO · sept. 2026", "Machine Learning, IA générative, prompt engineering, éthique et usage responsable."], ["L'IA pour les débutants et pour les professionnels", "HP LIFE (HP Foundation) · sept. 2026", "Bases de l'IA, outils d'IA en entreprise, rédaction de prompts efficaces."], ["KICKOFF Predictive Badge", "Project Management Institute (PMI) · 2026", "Gestion de projet prédictive : charte, planification, suivi (WBS, Kanban, Burndown)."], ["Introduction au C#", "freeCodeCamp · mars 2026", "Fondamentaux de la programmation orientée objet en C#."], ["JavaScript 1", "Cisco Networking Academy · mars 2026", "Bases de JavaScript pour le web : variables, fonctions, logique."], ["Comprendre le monde du numérique et découvrir les métiers du numérique", "Digital Valley · août 2026", ""]], "sk": ["C# (.NET), JavaScript, HTML, CSS, Python", "IA : NumPy, Pandas, Machine Learning", "Maintenance hardware, diagnostic, installation de logiciels", "Réseau informatique", "Électrotechnique, dépannage, schémas électriques", "Dessin technique, lecture de plan", "Environnement Windows"], "lg": ["Français", "Fongbé", "Anglais"], "hb": ["Petits projets personnels", "Lecture", "Sport (football et tennis)"]},
+pj1:"Mes",pj2:"Projets",p1t:"Morpion intelligent",p1p:"Un morpion où une IA apprend à jouer : comparaison entre Q-learning et Deep Q-Network.",p2p:"Plateforme de formations : inscriptions, comptes apprenants et certificats avec QR code vérifiable.",p3t:"Plateforme d'exercices de code",p3p:"Application web pour aider les étudiants en informatique à s'entraîner à la programmation.",p4p:"Page web de vérification de tickets prépayés.",gh:"Voir mon GitHub",
+serv_t1:"Mes",serv_t2:"Services",s1t:"Développement web",s1p:"Sites vitrines, portfolios et applications web rapides, adaptés au mobile.",s2t:"Design UI / UX",s2p:"Interfaces claires et modernes, pensées pour vos utilisateurs.",s3t:"IA et données",s3p:"Prototypes d'intelligence artificielle et analyse de données avec Python.",
+ct1:"Me",ct2:"Contacter",ph_name:"Nom complet",ph_mail:"Email",ph_tel:"Numéro de téléphone",ph_sug:"Suggestion",ph_msg:"Votre message",send:"Envoyer le message",
+f_about:"À propos de moi",privacy:"Politique de confidentialité",admin:"Espace admin",rights:"Tous droits réservés",inbox:"Messages reçus",clear:"Tout supprimer",
+ok:"Merci ! Votre message a bien été envoyé.",none:"Aucun message pour le moment.",pwd:"Mot de passe admin :",bad:"Mot de passe incorrect.",confirm:"Supprimer tous les messages ?",
+roles:["Développeur Web","Data Scientist","Architecte Digital","Designer UI / UX","Passionné d'IA"]},
+en:{nav_home:"Home",nav_about:"About",nav_cv:"Résumé",nav_proj:"Projects",nav_services:"Services",nav_contact:"Contact",hello:"It's",iam:"I'm a",
+intro:"Computer engineering student, web developer and AI enthusiast. I build modern websites and digital solutions with MAAT LABS.",hire:"Hire me",
+about_t1:"About",about_t2:"me",about_p:"A 2nd-year Computer Systems and Software student at ISGG (Benin), I build websites and I'm training in artificial intelligence and Machine Learning. I believe in simple, useful, well-designed tools.",more:"See my résumé",
+cv1:"My",dl:"Download my résumé (PDF)",h_edu:"Education",h_exp:"Work experience",h_cert:"Certifications",h_sk:"Skills",h_lg:"Languages",h_hb:"Interests",cv:{"profil": "A 2nd-year Computer Systems and Software student with a solid technical background (computer installation and maintenance, electrical engineering). Passionate about new technologies, I built my programming skills (C#, JavaScript) through recognized certifications. A member of the AI club at the Bénin Excellence library in Godomey, I'm following Machine Learning courses. Rigorous and curious, I want to put my versatility to work in a professional team.", "edu": [["Bachelor's in Computer Systems and Software", "Higher Institute of Civil Engineering and Management (ISGG), Abomey-Calavi", "Since Oct. 2025"], ["EEIA 2026 – Summer School on Artificial Intelligence", "Intensive program, Benin", "Jul. – Aug. 2026"], ["GCI World course – Matsuo-Iwasawa Lab", "University of Tokyo", "Ongoing"], ["Computer Installation and Maintenance Technician (IMI)", "Complexe Privé d'Enseignement Technique Le FAUCON, Abomey-Calavi", "Sept. 2022 – Aug. 2025"], ["Vocational certificate (CAP) in Electrical Engineering", "Complexe Privé d'Enseignement Technique Le FAUCON, Abomey-Calavi", "Sept. 2022 – Jun. 2024"], ["Junior secondary school certificate (BEPC)", "Complexe Scolaire BETHLEEM, Ahossougbéta", "Sept. 2021 – Jul. 2022"], ["Primary school certificate (CEP)", "Complexe Scolaire BETHLEEM, Ahossougbéta", "Sept. 2015 – Jun. 2016"]], "exp": [["Computer maintenance intern", "École Supérieure le FAUCON, Abomey-Calavi", "Jun. – Jul. 2023", "Repair, updates and cleaning of the computer fleet, user support, software bug fixing, equipment inventory."], ["Web development intern", "École Supérieure le FAUCON (ESF), Abomey-Calavi", "Jun. – Aug. 2023", "Front-end basics (HTML, CSS) and work with the teaching team on the architecture of a dynamic website."]], "cert": [["Fundamentals of AI", "Heure IA · UNESCO framework · Sept. 2026", "Machine Learning, generative AI, prompt engineering, ethics and responsible use."], ["AI for Beginners and AI for Professionals", "HP LIFE (HP Foundation) · Sept. 2026", "AI basics, business AI tools, writing effective prompts."], ["KICKOFF Predictive Badge", "Project Management Institute (PMI) · 2026", "Predictive project management: charter, planning, tracking (WBS, Kanban, Burndown)."], ["Introduction to C#", "freeCodeCamp · Mar. 2026", "Fundamentals of object-oriented programming in C#."], ["JavaScript 1", "Cisco Networking Academy · Mar. 2026", "JavaScript basics for the web: variables, functions, logic."], ["Understanding the Digital World and Discovering Digital Careers", "Digital Valley · Aug. 2026", ""]], "sk": ["C# (.NET), JavaScript, HTML, CSS, Python", "AI: NumPy, Pandas, Machine Learning", "Hardware maintenance, diagnostics, software installation", "Computer networking", "Electrical engineering, troubleshooting, wiring diagrams", "Technical drawing, plan reading", "Windows environment"], "lg": ["French", "Fongbe", "English"], "hb": ["Small personal projects", "Reading", "Sports (football and tennis)"]},
+pj1:"My",pj2:"Projects",p1t:"Smart Tic-Tac-Toe",p1p:"A tic-tac-toe game where an AI learns to play: Q-learning compared with a Deep Q-Network.",p2p:"Training platform: sign-ups, learner accounts and certificates with a verifiable QR code.",p3t:"Coding exercises platform",p3p:"Web app helping computer science students practice programming.",p4p:"Web page to verify prepaid tickets.",gh:"See my GitHub",
+serv_t1:"My",serv_t2:"Services",s1t:"Web development",s1p:"Showcase sites, portfolios and fast web apps, built for mobile.",s2t:"UI / UX design",s2p:"Clear, modern interfaces designed around your users.",s3t:"AI & data",s3p:"Artificial intelligence prototypes and data analysis with Python.",
+ct1:"Contact",ct2:"Me",ph_name:"Full name",ph_mail:"Email",ph_tel:"Phone number",ph_sug:"Suggestion",ph_msg:"Your message",send:"Send message",
+f_about:"About me",privacy:"Privacy Policy",admin:"Admin area",rights:"All rights reserved",inbox:"Received messages",clear:"Delete all",
+ok:"Thank you! Your message has been sent.",none:"No messages yet.",pwd:"Admin password:",bad:"Wrong password.",confirm:"Delete all messages?",
+roles:["Web Developer","Data Scientist","Digital Architect","UI / UX Designer","AI Enthusiast"]}};
+var $=function(s){return document.querySelector(s)},$$=function(s){return document.querySelectorAll(s)};
+function st(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+
+function renderCV(){var c=T[lang].cv;
+  $("#cv-profil").textContent=c.profil;
+  var tl=function(a){return a.map(function(e){return '<div><b>'+e[0]+'</b><span>'+e[1]+'</span><small>'+e[2]+'</small>'+(e[3]?'<p>'+e[3]+'</p>':'')+'</div>'}).join("")};
+  $("#cv-edu").innerHTML=tl(c.edu);$("#cv-exp").innerHTML=tl(c.exp);
+  $("#cv-cert").innerHTML=c.cert.map(function(e){return '<div class="card"><h3>'+e[0]+'</h3><p>'+e[2]+'</p><small>'+e[1]+'</small></div>'}).join("");
+  var ul=function(a){return a.map(function(x){return '<li>'+x+'</li>'}).join("")};
+  $("#cv-sk").innerHTML=ul(c.sk);$("#cv-lg").innerHTML=ul(c.lg);$("#cv-hb").innerHTML=ul(c.hb);
+}
+var lang=st("maat_lang")||((navigator.language||"fr").slice(0,2)==="fr"?"fr":"en"),ri=0,ci=0,del=false;
+function applyLang(){
+  document.documentElement.lang=lang;
+  $$("[data-i18n]").forEach(function(e){var v=T[lang][e.dataset.i18n];if(v)e.textContent=v});
+  $$("[data-i18n-ph]").forEach(function(e){e.placeholder=T[lang][e.dataset.i18nPh]});
+  $("#lang").textContent=lang==="fr"?"EN":"FR";ri=0;ci=0;del=false;renderCV();
+}
+$("#lang").onclick=function(){lang=lang==="fr"?"en":"fr";st("maat_lang",lang);applyLang()};
+
+var theme=st("maat_theme")||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");
+function applyTheme(){document.documentElement.setAttribute("data-theme",theme);$("#theme").textContent=theme==="dark"?"☀":"☾"}
+$("#theme").onclick=function(){theme=theme==="dark"?"light":"dark";st("maat_theme",theme);applyTheme()};
+
+$("#burger").onclick=function(){$("#nav").classList.toggle("open")};
+$$("#nav a").forEach(function(a){a.onclick=function(){$("#nav").classList.remove("open")}});
+var secs=$$("section");
+addEventListener("scroll",function(){
+  var cur="home";secs.forEach(function(s){if(scrollY>=s.offsetTop-140)cur=s.id});
+  $$("#nav a").forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+cur)});
+},{passive:true});
+
+(function tick(){
+  var w=T[lang].roles[ri%T[lang].roles.length],d=120;
+  if(!del){ci++;if(ci>=w.length){del=true;d=1400}}else{ci--;d=60;if(ci<=0){del=false;ri++;d=300}}
+  $("#typed").textContent=w.slice(0,ci);setTimeout(tick,d);
+})();
+
+function getMsgs(){try{return JSON.parse(st("maat_messages")||"[]")}catch(e){return[]}}
+$("#f").onsubmit=function(e){
+  e.preventDefault();
+  var m={date:new Date().toLocaleString()};new FormData(e.target).forEach(function(v,k){m[k]=v});
+  var all=getMsgs();all.unshift(m);st("maat_messages",JSON.stringify(all));
+  if(FORM_ENDPOINT){try{fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(m)})}catch(x){}}
+  e.target.reset();$("#msg-ok").textContent=T[lang].ok;setTimeout(function(){$("#msg-ok").textContent=""},5000);
+};
+function esc(s){return String(s||"").replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function render(){
+  var a=getMsgs();
+  $("#list").innerHTML=a.length?a.map(function(m){return '<div class="m"><b>'+esc(m.nom)+'</b> · '+esc(m.email)+' · '+esc(m.tel)+'<br><small>'+esc(m.date)+'</small><br><i>'+esc(m.suggestion)+'</i><p>'+esc(m.message)+'</p></div>'}).join(""):'<p>'+T[lang].none+'</p>';
+}
+$("#open-adm").onclick=function(e){e.preventDefault();var p=prompt(T[lang].pwd);if(p===null)return;if(p!==ADMIN_PASSWORD){alert(T[lang].bad);return}render();$("#adm").classList.add("open")};
+$("#cls").onclick=function(){$("#adm").classList.remove("open")};
+$("#clr").onclick=function(){if(confirm(T[lang].confirm)){st("maat_messages","[]");render()}};
+$("#csv").onclick=function(){
+  var rows=[["date","nom","email","tel","suggestion","message"]].concat(getMsgs().map(function(m){return[m.date,m.nom,m.email,m.tel,m.suggestion,m.message]}));
+  var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c||"").replace(/"/g,'""')+'"'}).join(",")}).join("\n");
+  var a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv"}));a.download="messages.csv";a.click();
+};
+applyTheme();applyLang();
+</script>
+</body>
+</html>
