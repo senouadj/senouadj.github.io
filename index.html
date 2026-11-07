@@ -163,6 +163,7 @@ footer a{color:var(--txt);text-decoration:none}footer a:hover{color:var(--acc)}
     <input name="email" type="email" required data-i18n-ph="ph_mail" placeholder="Email" autocomplete="email">
     <input name="tel" type="tel" data-i18n-ph="ph_tel" placeholder="Numéro de téléphone" autocomplete="tel">
     <input name="suggestion" data-i18n-ph="ph_sug" placeholder="Suggestion">
+    <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0">
     <textarea name="message" required data-i18n-ph="ph_msg" placeholder="Votre message"></textarea>
     <button class="btn" type="submit" data-i18n="send">Envoyer le message</button>
     <p id="msg-ok" role="status"></p>
@@ -193,7 +194,7 @@ footer a{color:var(--txt);text-decoration:none}footer a:hover{color:var(--acc)}
 <script>
 /* ===== RÉGLAGES ===== */
 var ADMIN_PASSWORD = "maatlabs2026";  // change-le !
-var FORM_ENDPOINT  = "";              // ex: "https://formspree.io/f/xxxxxxx" pour recevoir aussi les messages par e-mail
+var FORM_ENDPOINT  = "https://formsubmit.co/ajax/senouadjogan9@gmail.com";  // les messages arrivent sur cette adresse e-mail (activation requise au 1er envoi)
 
 var T={
 fr:{nav_home:"Accueil",nav_about:"À propos",nav_cv:"CV",nav_proj:"Projets",nav_services:"Services",nav_contact:"Contact",hello:"C'est",iam:"Je suis",
@@ -204,7 +205,7 @@ pj1:"Mes",pj2:"Projets",p1t:"Morpion intelligent",p1p:"Un morpion où une IA app
 serv_t1:"Mes",serv_t2:"Services",s1t:"Développement web",s1p:"Sites vitrines, portfolios et applications web rapides, adaptés au mobile.",s2t:"Design UI / UX",s2p:"Interfaces claires et modernes, pensées pour vos utilisateurs.",s3t:"IA et données",s3p:"Prototypes d'intelligence artificielle et analyse de données avec Python.",
 ct1:"Me",ct2:"Contacter",ph_name:"Nom complet",ph_mail:"Email",ph_tel:"Numéro de téléphone",ph_sug:"Suggestion",ph_msg:"Votre message",send:"Envoyer le message",
 f_about:"À propos de moi",privacy:"Politique de confidentialité",admin:"Espace admin",rights:"Tous droits réservés",inbox:"Messages reçus",clear:"Tout supprimer",
-ok:"Merci ! Votre message a bien été envoyé.",none:"Aucun message pour le moment.",pwd:"Mot de passe admin :",bad:"Mot de passe incorrect.",confirm:"Supprimer tous les messages ?",
+ok:"Merci ! Votre message a bien été envoyé.",sending:"Envoi en cours…",err:"Envoi impossible pour le moment. Écrivez-moi directement à senouadjogan9@gmail.com.",none:"Aucun message pour le moment.",pwd:"Mot de passe admin :",bad:"Mot de passe incorrect.",confirm:"Supprimer tous les messages ?",
 roles:["Développeur Web","Data Scientist","Architecte Digital","Designer UI / UX","Passionné d'IA"]},
 en:{nav_home:"Home",nav_about:"About",nav_cv:"Résumé",nav_proj:"Projects",nav_services:"Services",nav_contact:"Contact",hello:"It's",iam:"I'm a",
 intro:"Computer engineering student, web developer and AI enthusiast. I build modern websites and digital solutions with MAAT LABS.",hire:"Hire me",
@@ -214,7 +215,7 @@ pj1:"My",pj2:"Projects",p1t:"Smart Tic-Tac-Toe",p1p:"A tic-tac-toe game where an
 serv_t1:"My",serv_t2:"Services",s1t:"Web development",s1p:"Showcase sites, portfolios and fast web apps, built for mobile.",s2t:"UI / UX design",s2p:"Clear, modern interfaces designed around your users.",s3t:"AI & data",s3p:"Artificial intelligence prototypes and data analysis with Python.",
 ct1:"Contact",ct2:"Me",ph_name:"Full name",ph_mail:"Email",ph_tel:"Phone number",ph_sug:"Suggestion",ph_msg:"Your message",send:"Send message",
 f_about:"About me",privacy:"Privacy Policy",admin:"Admin area",rights:"All rights reserved",inbox:"Received messages",clear:"Delete all",
-ok:"Thank you! Your message has been sent.",none:"No messages yet.",pwd:"Admin password:",bad:"Wrong password.",confirm:"Delete all messages?",
+ok:"Thank you! Your message has been sent.",sending:"Sending…",err:"Could not send right now. Please email me directly at senouadjogan9@gmail.com.",none:"No messages yet.",pwd:"Admin password:",bad:"Wrong password.",confirm:"Delete all messages?",
 roles:["Web Developer","Data Scientist","Digital Architect","UI / UX Designer","AI Enthusiast"]}};
 var $=function(s){return document.querySelector(s)},$$=function(s){return document.querySelectorAll(s)};
 function st(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
@@ -257,10 +258,22 @@ addEventListener("scroll",function(){
 function getMsgs(){try{return JSON.parse(st("maat_messages")||"[]")}catch(e){return[]}}
 $("#f").onsubmit=function(e){
   e.preventDefault();
-  var m={date:new Date().toLocaleString()};new FormData(e.target).forEach(function(v,k){m[k]=v});
+  var f=e.target,btn=f.querySelector("button[type=submit]"),out=$("#msg-ok");
+  if(f.querySelector("[name=_honey]").value)return;
+  var m={date:new Date().toLocaleString()};
+  new FormData(f).forEach(function(v,k){if(k.charAt(0)!=="_")m[k]=v});
   var all=getMsgs();all.unshift(m);st("maat_messages",JSON.stringify(all));
-  if(FORM_ENDPOINT){try{fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(m)})}catch(x){}}
-  e.target.reset();$("#msg-ok").textContent=T[lang].ok;setTimeout(function(){$("#msg-ok").textContent=""},5000);
+  function done(t){out.textContent=t;btn.disabled=false;setTimeout(function(){out.textContent=""},7000)}
+  if(!FORM_ENDPOINT){f.reset();done(T[lang].ok);return}
+  btn.disabled=true;out.textContent=T[lang].sending;
+  var body=Object.assign({_subject:"Nouveau message du portfolio MAAT LABS",_template:"table",_captcha:"false",_replyto:m.email},m);
+  fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(body)})
+    .then(function(r){return r.json()})
+    .then(function(j){
+      var ok=j&&(j.success===true||j.success==="true"||/activat/i.test(j.message||""));
+      if(ok){f.reset();done(T[lang].ok)}else{done(T[lang].err)}
+    })
+    .catch(function(){done(T[lang].err)});
 };
 function esc(s){return String(s||"").replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function render(){
